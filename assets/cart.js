@@ -17,16 +17,7 @@ class CartRemoveButton extends HTMLElement {
         });
 
         fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
-          .then((response) => {
-            return response.text();
-          })
-          .then(response => {
-            return response.json();
-          })
-          .then(data => console.log(data))
-          .catch((error) => {
-            console.error('Error:', error);
-          });
+          
 
 
       }
