@@ -11,7 +11,7 @@ class CartRemoveButton extends HTMLElement {
       if (checkVaraintIdOfAdditionalProduct == 44726287630559) {
 
         const body = JSON.stringify({
-          "line": 1,
+          "line": "1",
           "quantity": 0,
 
         });
