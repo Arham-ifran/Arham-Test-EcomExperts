@@ -9,11 +9,8 @@
   Usage:
   {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
 {% endcomment %}
+{{product.id}}
 {%- unless product.has_only_default_variant -%}
-
-  {% assign sizeOptions = product.options_by_name['Size'].values %}
-  {% assign sizeOptionsCount = sizeOptions | size %}
-   {{ sizeOptionsCount}}
   {%- if block.settings.picker_type == 'button' -%}
     <variant-radios
       id="variant-radios-{{ section.id }}"
