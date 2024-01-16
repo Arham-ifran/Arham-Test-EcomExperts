@@ -9,7 +9,25 @@ class CartRemoveButton extends HTMLElement {
 
       const checkVaraintIdOfAdditionalProduct = this.getAttribute('data-variantId');
       if (checkVaraintIdOfAdditionalProduct == 44726287630559) {
-       
+
+        const body = JSON.stringify({
+          "line": 1,
+          "quantity": 0,
+
+        });
+
+        fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
+          .then((response) => {
+            return response.text();
+          })
+          .then(response => {
+            return response.json();
+          })
+          .then(data => console.log(data))
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+
 
       }
 
@@ -121,7 +139,7 @@ class CartItems extends HTMLElement {
       sections: this.getSectionsToRender().map((section) => section.section),
       sections_url: window.location.pathname,
     });
-    console.log(body);
+
     fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
       .then((response) => {
         return response.text();
