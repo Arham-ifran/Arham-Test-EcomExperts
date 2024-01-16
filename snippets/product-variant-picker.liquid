@@ -10,13 +10,7 @@
   {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
 {% endcomment %}
 {%- unless product.has_only_default_variant -%}
-
-  {%- assign hasSizeOption = false -%}
-
-
-
-  
-
+ 
     <variant-selects
       id="variant-selects-{{ section.id }}"
       class="no-js-hidden"
