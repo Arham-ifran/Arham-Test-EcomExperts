@@ -171,24 +171,27 @@ class CartItems extends HTMLElement {
 
         publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items', cartData: parsedState, variantId: variantId });
       }).then((response) => {
-      //   const body = JSON.stringify({
-      //     "id": "44711197606111",
-      //     "quantity": "0",
+        if (variantId == 44726287630559) {
+        const body = JSON.stringify({
+          "id": "44711197606111",
+          "quantity": "0",
 
-      //   });
+        });
 
-      //   fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
-      //     .then((response) => {
-      //       return response.text();
-      //     })
-      //     .then(response => {
-      //       return response.json();
-      //     })
-      //     .then(data => console.log(data))
-      //     .catch((error) => {
-      //       console.error('Error:', error);
-      //     });
-        
+        fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
+          .then((response) => {
+            return response.text();
+          })
+          .then(response => {
+            return response.json();
+          })
+          .then(data => {
+            console.log(data)}
+          )
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+        }
        })
 
 
