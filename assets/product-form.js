@@ -21,15 +21,7 @@ if (!customElements.get('product-form')) {
         if (this.submitButton.getAttribute('aria-disabled') === 'true') return;
 
         this.handleErrorMessage();
-        /**
-        Line added by : Arham 
-        Purpose: function Declaration 
-        function :add addition product in cart 
-        **/
-
-        //this.handleAdditionalProductInCart();
-
-        this.submitButton.setAttribute('aria-disabled', true);
+         this.submitButton.setAttribute('aria-disabled', true);
         this.submitButton.classList.add('loading');
         this.querySelector('.loading__spinner').classList.remove('hidden');
 
@@ -39,9 +31,7 @@ if (!customElements.get('product-form')) {
 
         const formData = new FormData(this.form);
 
-        // for (let pair of formData.entries()) {
-        //   console.log(pair[0], pair[1]);
-        // }
+        
 
 
         if (this.cart) {
