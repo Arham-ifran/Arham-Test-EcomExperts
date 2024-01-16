@@ -39,9 +39,9 @@ if (!customElements.get('product-form')) {
 
         const formData = new FormData(this.form);
 
-        for (let pair of formData.entries()) {
-          console.log(pair[0], pair[1]);
-        }
+        // for (let pair of formData.entries()) {
+        //   console.log(pair[0], pair[1]);
+        // }
 
 
         if (this.cart) {
@@ -104,7 +104,10 @@ if (!customElements.get('product-form')) {
             /* Line added by : Arham 
                 Purpose: call Custom Function
             */
-            this.handleAdditionalProductInCart();
+            if (formData.get('id') == 44726287630559) {
+
+              this.handleAdditionalProductInCart();
+            }
           })
           .catch((e) => {
             console.error(e);
