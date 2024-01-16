@@ -5,7 +5,8 @@ class CartRemoveButton extends HTMLElement {
     this.addEventListener('click', (event) => {
       event.preventDefault();
       const cartItems = this.closest('cart-items') || this.closest('cart-drawer-items');
-      cartItems.updateQuantity(this.dataset.index, 0);
+      
+      cartItems.updateQuantity(this.dataset.index, 0,'',cartItems.getAttribute('data-variantId'));
     });
   }
 }
@@ -104,8 +105,9 @@ class CartItems extends HTMLElement {
   }
 
   updateQuantity(line, quantity, name, variantId) {
+    console.log(variantId)
     this.enableLoading(line);
-    console.log('here');
+    
     const body = JSON.stringify({
       line,
       quantity,
@@ -169,25 +171,25 @@ class CartItems extends HTMLElement {
 
         publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items', cartData: parsedState, variantId: variantId });
       }).then((response) => {
-        // const body = JSON.stringify({
-        //   "id": "44711197606111",
-        //   "quantity": "0",
+      //   const body = JSON.stringify({
+      //     "id": "44711197606111",
+      //     "quantity": "0",
 
-        // });
+      //   });
 
-        // fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
-        //   .then((response) => {
-        //     return response.text();
-        //   })
-        //   .then(response => {
-        //     return response.json();
-        //   })
-        //   .then(data => console.log(data))
-        //   .catch((error) => {
-        //     console.error('Error:', error);
-        //   });
-        updateQuantity(1,0)
-      })
+      //   fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
+      //     .then((response) => {
+      //       return response.text();
+      //     })
+      //     .then(response => {
+      //       return response.json();
+      //     })
+      //     .then(data => console.log(data))
+      //     .catch((error) => {
+      //       console.error('Error:', error);
+      //     });
+        
+       })
 
 
       .catch(() => {
