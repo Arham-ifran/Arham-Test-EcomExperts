@@ -171,21 +171,23 @@ class CartItems extends HTMLElement {
 
 
 
-        const body2 = JSON.stringify({
-          id: 44711197606111,
-          quantity: 0,
-
+        const body = JSON.stringify({
+          "id":44711197606111,
+          "quantity":0,
+          
         });
-
-        fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body2 } })
-          .then(response => response.json())
-          .then(data => {
-            console.log(data);
+  
+      fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
+        .then((response) => {
+          return response.text();
+        })
+          .then(response => {
+            return response.json();
           })
-          .catch(error => {
+          .then(data => console.log(data))
+          .catch((error) => {
             console.error('Error:', error);
           });
-
 
 
 
