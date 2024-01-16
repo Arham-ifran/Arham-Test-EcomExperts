@@ -11,7 +11,11 @@
 {% endcomment %}
 
 {%- unless product.has_only_default_variant -%}
- mmmmmm
+
+  {% for product_option in product.options_with_values %}
+    {{product_option  }}
+  {%- endfor -%}
+
   {%- if block.settings.picker_type == 'button' -%}
     <variant-radios
       id="variant-radios-{{ section.id }}"
