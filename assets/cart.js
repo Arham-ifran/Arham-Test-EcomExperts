@@ -179,20 +179,14 @@ class CartItems extends HTMLElement {
         });
 
         fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
-          .then((response) => {
-            return response.text();
-          })
-          .then(response => {
-            return response.json();
-          })
-          .then(data => {
-            console.log(data)
-            location.reload();
-          }
-          )
-          .catch((error) => {
-            console.error('Error:', error);
-          });
+        .then((response) => response.json())
+        .then(data => {
+          console.log(data);
+          location.reload();
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
         }
        })
 
