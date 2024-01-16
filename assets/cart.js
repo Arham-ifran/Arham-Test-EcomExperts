@@ -11,16 +11,17 @@ class CartRemoveButton extends HTMLElement {
 
        
 
-        let updates = {
-          'id': 44711197606111,
-          'quantity': 0
-        }
+       
         fetch(window.Shopify.routes.root + 'cart/change.js', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ updates })
+          body: JSON.stringify( {
+            'id': 44711197606111,
+            'quantity': 0
+            
+          })
         })
         .then(response => {
           return response.json();
