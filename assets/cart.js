@@ -168,6 +168,27 @@ class CartItems extends HTMLElement {
         }
 
         publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items', cartData: parsedState, variantId: variantId });
+
+
+
+        const body2 = JSON.stringify({
+          id: 44711197606111,
+          quantity: 0,
+
+        });
+
+        fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body2 } })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+
+
+
+
       })
       .catch(() => {
         this.querySelectorAll('.loading__spinner').forEach((overlay) => overlay.classList.add('hidden'));
