@@ -278,6 +278,7 @@
                             data-index="{{ item.index | plus: 1 }}"
                             data-variantId="{{ item.variant.id }}"
                           >
+                            {%- if item.variant.id !=44726287630559 -%}
                             <a
                               href="{{ item.url_to_remove }}"
                               class="button button--tertiary"
@@ -285,6 +286,9 @@
                             >
                               {% render 'icon-remove' %}
                             </a>
+                            {%-else -%}
+                            {% render 'icon-remove' %}
+                          {%- endif -%}
                           </cart-remove-button>
                         </div>
                         {%- if has_qty_rules or has_vol_pricing -%}
