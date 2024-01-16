@@ -18,7 +18,7 @@ class CartRemoveButton extends HTMLElement {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify( {
-            'id': 44711197606111,
+            'id': "44711197606111:a0c2e404d4d9e026ca3f5de533647a6f",
             'quantity': 0
             
           })
