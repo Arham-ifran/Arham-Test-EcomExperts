@@ -9,13 +9,8 @@
   Usage:
   {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
 {% endcomment %}
-{{product.id}}
-{%- if product.id == 8265474048223 -%}
-  sssss
-{%- else -%}
-  
 {%- unless product.has_only_default_variant -%}
-  {%- if block.settings.picker_type == 'button' -%}
+  {% comment %} {%- if block.settings.picker_type == 'button' -%} {% endcomment %}
     <variant-radios
       id="variant-radios-{{ section.id }}"
       class="no-js-hidden"
@@ -36,7 +31,7 @@
         {{ product.variants | json }}
       </script>
     </variant-radios>
-  {%- else -%}
+  {% comment %} {%- else -%} {% endcomment %}
     <variant-selects
       id="variant-selects-{{ section.id }}"
       class="no-js-hidden"
@@ -70,9 +65,9 @@
         {{ product.variants | json }}
       </script>
     </variant-selects>
-  {%- endif -%}
+  {% comment %} {%- endif -%} {% endcomment %}
 {%- endunless -%}
-{% endif %}
+
 <noscript class="product-form__noscript-wrapper-{{ section.id }}">
   <div class="product-form__input{% if product.has_only_default_variant %} hidden{% endif %}">
     <label class="form__label" for="Variants-{{ section.id }}">
