@@ -162,7 +162,7 @@ class CartItems extends HTMLElement {
       //       console.error('Error:', error);
       //     });
 
-
+      
         this.getSectionsToRender().forEach((section) => {
           const elementToReplace =
             document.getElementById(section.id).querySelector(section.selector) || document.getElementById(section.id);
@@ -195,15 +195,15 @@ class CartItems extends HTMLElement {
         }
 
 
-        this.updateQuantity2()
+     
 
-        
+
         publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items', cartData: parsedState, variantId: variantId });
         
 
 
    
-
+        this.updateQuantity2()
 
 
       })
@@ -219,6 +219,7 @@ class CartItems extends HTMLElement {
 
 
   updateQuantity2() {
+    console.log('hhhh');
     this.enableLoading(line);
 
     const body = JSON.stringify({
