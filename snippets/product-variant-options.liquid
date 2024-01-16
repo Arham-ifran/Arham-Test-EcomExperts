@@ -22,7 +22,7 @@
 
   assign product_form_id = 'product-form-' | append: section.id
 -%}
-{{variants_option1_arr[forloop.index0] }}
+{{variants_option1_arr }}
 {%- for value in option.values -%}
   {%- liquid
     assign option_disabled = true
