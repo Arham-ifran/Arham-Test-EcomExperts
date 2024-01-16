@@ -10,8 +10,14 @@
   {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
 {% endcomment %}
 {%- unless product.has_only_default_variant -%}
-{{product.options.size }}asad
-  {%- if block.settings.picker_type == 'button'  -%}
+
+  {% if product.options.size > 0 -%}
+    {% for option in product.options -%}
+      - {{ option }}
+    {%- endfor %}
+  {%- endif %}
+  
+  {%- if block.settings.picker_type == 'button' -%}
     <variant-radios
       id="variant-radios-{{ section.id }}"
       class="no-js-hidden"
