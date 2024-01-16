@@ -11,8 +11,8 @@ class CartRemoveButton extends HTMLElement {
 
        
         var formData = new FormData();
-        formData.append("updates[44711197606111]", 2);
-        
+        formData.append("updates[44711197606111]", 0);
+        formData.append("updates[44726287630559]", 0);
         fetch(window.Shopify.routes.root + 'cart/update.js', {
           method: 'POST',
           body: formData
