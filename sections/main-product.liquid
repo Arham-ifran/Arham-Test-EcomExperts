@@ -622,9 +622,9 @@
       // Check if the URL contains a variant parameter
       if (currentUrl.includes('?variant=')) {
         
-       
+        var newUrl = currentUrl.replace(/\?variant=[^&]+&?/, '');
 
-        window.history.replaceState({}, '', `${currentUrl}?variant=44726287565023`);
+        window.history.replaceState({}, '', `${newUrl}?variant=44726287565023`);
       }
     };
   </script>
