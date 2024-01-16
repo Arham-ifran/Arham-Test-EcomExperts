@@ -621,11 +621,10 @@
     
       // Check if the URL contains a variant parameter
       if (currentUrl.includes('?variant=')) {
-        // Remove the variant parameter
-        var newUrl = currentUrl.replace(/\?variant=[^&]+&?/, '');
-    
-        // Replace the current URL with the modified one
-        window.history.replaceState({}, document.title, newUrl);
+        
+       
+
+        window.history.replaceState({}, '', `${this.dataset.url}?variant=44726287565023`);
       }
     };
   </script>
