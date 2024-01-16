@@ -5,25 +5,7 @@ class CartRemoveButton extends HTMLElement {
     this.addEventListener('click', (event) => {
       event.preventDefault();
       const cartItems = this.closest('cart-items') || this.closest('cart-drawer-items');
-
-
-      const checkVaraintIdOfAdditionalProduct = this.getAttribute('data-variantId');
-      if (checkVaraintIdOfAdditionalProduct == 44726287630559) {
-
-        const body = JSON.stringify({
-          "line": "1",
-          "quantity": 0,
-
-        });
-
-        fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
-          
-
-
-      }
-
       cartItems.updateQuantity(this.dataset.index, 0);
-
     });
   }
 }
