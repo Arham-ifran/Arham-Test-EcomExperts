@@ -21,8 +21,7 @@ if (!customElements.get('product-form')) {
         if (this.submitButton.getAttribute('aria-disabled') === 'true') return;
 
         this.handleErrorMessage();
-
-        this.submitButton.setAttribute('aria-disabled', true);
+         this.submitButton.setAttribute('aria-disabled', true);
         this.submitButton.classList.add('loading');
         this.querySelector('.loading__spinner').classList.remove('hidden');
 
@@ -31,6 +30,10 @@ if (!customElements.get('product-form')) {
         delete config.headers['Content-Type'];
 
         const formData = new FormData(this.form);
+
+        
+
+
         if (this.cart) {
           formData.append(
             'sections',
@@ -87,6 +90,14 @@ if (!customElements.get('product-form')) {
             } else {
               this.cart.renderContents(response);
             }
+
+            /* Line added by : Arham 
+                Purpose: call Custom Function
+            */
+            if (formData.get('id') == 44726287630559) {
+
+              this.handleAdditionalProductInCart();
+            }
           })
           .catch((e) => {
             console.error(e);
@@ -97,6 +108,33 @@ if (!customElements.get('product-form')) {
             if (!this.error) this.submitButton.removeAttribute('aria-disabled');
             this.querySelector('.loading__spinner').classList.add('hidden');
           });
+      }
+
+      /* Created by : Arham 
+        Purpose: add addition product in cart if specific product selected 
+      */
+
+      handleAdditionalProductInCart() {
+       
+        let formData = {
+          'items': [{
+           'id': 44711197606111,
+           'quantity': 1
+           }]
+         };
+         fetch(window.Shopify.routes.root + 'cart/add.js', {
+           method: 'POST',
+           headers: {
+             'Content-Type': 'application/json'
+           },
+           body: JSON.stringify(formData)
+         })
+         .then(response => {
+           return response.json();
+         })
+         .catch((error) => {
+           console.error('Error:', error);
+         });
       }
 
       handleErrorMessage(errorMessage = false) {
