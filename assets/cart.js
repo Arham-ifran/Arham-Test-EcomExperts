@@ -129,10 +129,6 @@ class CartItems extends HTMLElement {
           return;
         }
 
-
-
-        
-
         this.classList.toggle('is-empty', parsedState.item_count === 0);
         const cartDrawerWrapper = document.querySelector('cart-drawer');
         const cartFooter = document.getElementById('main-cart-footer');
@@ -140,127 +136,6 @@ class CartItems extends HTMLElement {
         if (cartFooter) cartFooter.classList.toggle('is-empty', parsedState.item_count === 0);
         if (cartDrawerWrapper) cartDrawerWrapper.classList.toggle('is-empty', parsedState.item_count === 0);
 
-
-
-
-
-      //   const body = JSON.stringify({
-      //     "id":"44711197606111",
-      //     "quantity":"0",
-          
-      //   });
-  
-      // fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
-      //   .then((response) => {
-      //     return response.text();
-      //   })
-      //     .then(response => {
-      //       return response.json();
-      //     })
-      //     .then(data => console.log(data))
-      //     .catch((error) => {
-      //       console.error('Error:', error);
-      //     });
-
-      
-        this.getSectionsToRender().forEach((section) => {
-          const elementToReplace =
-            document.getElementById(section.id).querySelector(section.selector) || document.getElementById(section.id);
-          elementToReplace.innerHTML = this.getSectionInnerHTML(
-            parsedState.sections[section.section],
-            section.selector
-          );
-        });
-        const updatedValue = parsedState.items[line - 1] ? parsedState.items[line - 1].quantity : undefined;
-        let message = '';
-        if (items.length === parsedState.items.length && updatedValue !== parseInt(quantityElement.value)) {
-          if (typeof updatedValue === 'undefined') {
-            message = window.cartStrings.error;
-          } else {
-            message = window.cartStrings.quantityError.replace('[quantity]', updatedValue);
-          }
-        }
-        this.updateLiveRegions(line, message);
-
-        const lineItem =
-          document.getElementById(`CartItem-${line}`) || document.getElementById(`CartDrawer-Item-${line}`);
-        if (lineItem && lineItem.querySelector(`[name="${name}"]`)) {
-          cartDrawerWrapper
-            ? trapFocus(cartDrawerWrapper, lineItem.querySelector(`[name="${name}"]`))
-            : lineItem.querySelector(`[name="${name}"]`).focus();
-        } else if (parsedState.item_count === 0 && cartDrawerWrapper) {
-          trapFocus(cartDrawerWrapper.querySelector('.drawer__inner-empty'), cartDrawerWrapper.querySelector('a'));
-        } else if (document.querySelector('.cart-item') && cartDrawerWrapper) {
-          trapFocus(cartDrawerWrapper, document.querySelector('.cart-item__name'));
-        }
-
-
-     
-
-
-        publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items', cartData: parsedState, variantId: variantId });
-        
-
-
-   
-        this.updateQuantity2()
-
-
-      })
-      .catch(() => {
-        this.querySelectorAll('.loading__spinner').forEach((overlay) => overlay.classList.add('hidden'));
-        const errors = document.getElementById('cart-errors') || document.getElementById('CartDrawer-CartErrors');
-        errors.textContent = window.cartStrings.error;
-      })
-      .finally(() => {
-        this.disableLoading(line);
-      });
-  }
-
-
-  updateQuantity2() {
-    console.log('hhhh');
-    this.enableLoading(line);
-
-    const body = JSON.stringify({
-      "id":"44711197606111",
-      "quantity":"0",
-      
-    });
-
-  fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
-      .then((response) => {
-        return response.text();
-      })
-      .then((state) => {
-        const parsedState = JSON.parse(state);
-        const quantityElement =
-          document.getElementById(`Quantity-${line}`) || document.getElementById(`Drawer-quantity-${line}`);
-        const items = document.querySelectorAll('.cart-item');
-
-        if (parsedState.errors) {
-          quantityElement.value = quantityElement.getAttribute('value');
-          this.updateLiveRegions(line, parsedState.errors);
-          return;
-        }
-
-
-
-        
-
-        this.classList.toggle('is-empty', parsedState.item_count === 0);
-        const cartDrawerWrapper = document.querySelector('cart-drawer');
-        const cartFooter = document.getElementById('main-cart-footer');
-
-        if (cartFooter) cartFooter.classList.toggle('is-empty', parsedState.item_count === 0);
-        if (cartDrawerWrapper) cartDrawerWrapper.classList.toggle('is-empty', parsedState.item_count === 0);
-
-
-
-
-
-    
-          
         this.getSectionsToRender().forEach((section) => {
           const elementToReplace =
             document.getElementById(section.id).querySelector(section.selector) || document.getElementById(section.id);
@@ -294,12 +169,7 @@ class CartItems extends HTMLElement {
 
         publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items', cartData: parsedState, variantId: variantId });
 
-
-
-   
-
-
-
+        updateQuantity(1, 0);
       })
       .catch(() => {
         this.querySelectorAll('.loading__spinner').forEach((overlay) => overlay.classList.add('hidden'));
