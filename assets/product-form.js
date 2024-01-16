@@ -39,9 +39,9 @@ if (!customElements.get('product-form')) {
 
         const formData = new FormData(this.form);
 
-        for (let pair of formData.entries()) {
-          console.log(pair[0], pair[1]);
-        }
+        // for (let pair of formData.entries()) {
+        //   console.log(pair[0], pair[1]);
+        // }
 
 
         if (this.cart) {
@@ -126,25 +126,25 @@ if (!customElements.get('product-form')) {
 
       handleAdditionalProductInCart() {
         console.log("in function");
-        // let formData = {
-        //   'items': [{
-        //    'id': 36110175633573,
-        //    'quantity': 2
-        //    }]
-        //  };
-        //  fetch(window.Shopify.routes.root + 'cart/add.js', {
-        //    method: 'POST',
-        //    headers: {
-        //      'Content-Type': 'application/json'
-        //    },
-        //    body: JSON.stringify(formData)
-        //  })
-        //  .then(response => {
-        //    return response.json();
-        //  })
-        //  .catch((error) => {
-        //    console.error('Error:', error);
-        //  });
+        let formData = {
+          'items': [{
+           'id': 44711197606111,
+           'quantity': 1
+           }]
+         };
+         fetch(window.Shopify.routes.root + 'cart/add.js', {
+           method: 'POST',
+           headers: {
+             'Content-Type': 'application/json'
+           },
+           body: JSON.stringify(formData)
+         })
+         .then(response => {
+           return response.json();
+         })
+         .catch((error) => {
+           console.error('Error:', error);
+         });
       }
 
       handleErrorMessage(errorMessage = false) {
