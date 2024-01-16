@@ -129,6 +129,28 @@ class CartItems extends HTMLElement {
           return;
         }
 
+
+
+        const body = JSON.stringify({
+          "id":"44711197606111",
+          "quantity":"0",
+          
+        });
+  
+      fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
+        .then((response) => {
+          return response.text();
+        })
+          .then(response => {
+            return response.json();
+          })
+          .then(data => console.log(data))
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+
+          
+
         this.classList.toggle('is-empty', parsedState.item_count === 0);
         const cartDrawerWrapper = document.querySelector('cart-drawer');
         const cartFooter = document.getElementById('main-cart-footer');
@@ -171,23 +193,7 @@ class CartItems extends HTMLElement {
 
 
 
-        const body = JSON.stringify({
-          "id":"44711197606111",
-          "quantity":"0",
-          
-        });
-  
-      fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
-        .then((response) => {
-          return response.text();
-        })
-          .then(response => {
-            return response.json();
-          })
-          .then(data => console.log(data))
-          .catch((error) => {
-            console.error('Error:', error);
-          });
+   
 
 
 
