@@ -9,7 +9,9 @@
   Usage:
   {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
 {% endcomment %}
+
 {%- unless product.has_only_default_variant -%}
+ mmmmmm
   {%- if block.settings.picker_type == 'button' -%}
     <variant-radios
       id="variant-radios-{{ section.id }}"
@@ -86,7 +88,7 @@
               selected="selected"
             {% endif %}
             {% if variant.available == false %}
-              disabled
+              disablediAND
             {% endif %}
             value="{{ variant.id }}"
           >
