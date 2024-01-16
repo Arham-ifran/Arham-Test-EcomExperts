@@ -10,7 +10,7 @@ class CartRemoveButton extends HTMLElement {
         if(checkVaraintIdOfAdditionalProduct==44726287630559){
           
           let updates = {
-            44711197606111: 3,
+            44711197606111: 0,
            
           };
           fetch(window.Shopify.routes.root + 'cart/update.js', {
