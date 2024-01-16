@@ -12,9 +12,9 @@
 
 {%- unless product.has_only_default_variant -%}
 
-  {% for product_option in product.options_with_values %}
-    {{product_option  }}
-  {%- endfor -%}
+  {% for value in product.options_with_values['color'] %}
+    {{ value }}
+ {% endfor %}
 
   {%- if block.settings.picker_type == 'button' -%}
     <variant-radios
