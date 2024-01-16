@@ -9,12 +9,10 @@ class CartRemoveButton extends HTMLElement {
 
       const checkVaraintIdOfAdditionalProduct = this.getAttribute('data-variantId');
       if (checkVaraintIdOfAdditionalProduct == 44726287630559) {
-        const index= this.dataset.index-1;
-        
-        cartItems.updateQuantity(index, 0);
+         cartItems.updateQuantity(1, 0);
 
       }
-      
+
       cartItems.updateQuantity(this.dataset.index, 0);
       
     });
