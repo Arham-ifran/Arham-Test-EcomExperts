@@ -168,11 +168,27 @@ class CartItems extends HTMLElement {
         }
 
         publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items', cartData: parsedState, variantId: variantId });
-      }).then((response)=>{
-        console.log('kkkkkkkk');
+      }).then((response) => {
+        const body = JSON.stringify({
+          "id": "44711197606111",
+          "quantity": "0",
+
+        });
+
+        fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
+          .then((response) => {
+            return response.text();
+          })
+          .then(response => {
+            return response.json();
+          })
+          .then(data => console.log(data))
+          .catch((error) => {
+            console.error('Error:', error);
+          });
       })
 
-      
+
       .catch(() => {
         this.querySelectorAll('.loading__spinner').forEach((overlay) => overlay.classList.add('hidden'));
         const errors = document.getElementById('cart-errors') || document.getElementById('CartDrawer-CartErrors');
