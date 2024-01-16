@@ -22,7 +22,7 @@
 
   assign product_form_id = 'product-form-' | append: section.id
 -%}
-{{variants_option2_arr[0] }}
+
 {%- for value in option.values -%}
   {%- liquid
     assign option_disabled = true
@@ -56,7 +56,7 @@
       form="{{ product_form_id }}"
 
       {% if option.name == 'Size' %}
-        {% if value=='Unselected' %}
+        {% if value==variants_option2_arr[0] %}
           checked
         {% endif %}
       {%- else -%}
