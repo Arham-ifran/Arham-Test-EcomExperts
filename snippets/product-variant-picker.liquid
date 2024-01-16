@@ -11,12 +11,9 @@
 {% endcomment %}
 {%- unless product.has_only_default_variant -%}
 
-  {% if product.options.size > 0 -%}
-    {% for option in product.options -%}
-      - {{ option }}
-    {%- endfor %}
-  {%- endif %}
-  
+  {%- if product.options_by_name['Size'].values > 0 -%}
+      {{block.settings.picker_type }}
+  {%- endif -%}
   {%- if block.settings.picker_type == 'button' -%}
     <variant-radios
       id="variant-radios-{{ section.id }}"
