@@ -21,7 +21,7 @@
 
 {{ hasSizeOption}} 
 
-  {%- if block.settings.picker_type == 'button' -%}
+{%- if block.settings.picker_type == 'button' and hasSizeOption == false -%}
     <variant-radios
       id="variant-radios-{{ section.id }}"
       class="no-js-hidden"
