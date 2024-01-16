@@ -172,8 +172,8 @@ class CartItems extends HTMLElement {
 
 
         const body = JSON.stringify({
-          "id":44711197606111,
-          "quantity":0,
+          "id":"44711197606111",
+          "quantity":"0",
           
         });
   
