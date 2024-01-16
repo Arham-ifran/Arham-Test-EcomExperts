@@ -22,12 +22,13 @@
 
   assign product_form_id = 'product-form-' | append: section.id
 -%}
-
+{{variants_option1_arr[forloop.index0] }}
 {%- for value in option.values -%}
   {%- liquid
     assign option_disabled = true
 
     for option1_name in variants_option1_arr
+    
       case option.position
         when 1
           if variants_option1_arr[forloop.index0] == value and variants_available_arr[forloop.index0]
