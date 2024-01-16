@@ -614,6 +614,21 @@
       });
     });
   </script>
+  <script>
+    window.onload = function() {
+      // Get the current URL
+      var currentUrl = window.location.href;
+    
+      // Check if the URL contains a variant parameter
+      if (currentUrl.includes('?variant=')) {
+        // Remove the variant parameter
+        var newUrl = currentUrl.replace(/\?variant=[^&]+&?/, '');
+    
+        // Replace the current URL with the modified one
+        window.history.replaceState({}, document.title, newUrl);
+      }
+    };
+  </script>
 
   {%- liquid
     if product.selected_or_first_available_variant.featured_media
