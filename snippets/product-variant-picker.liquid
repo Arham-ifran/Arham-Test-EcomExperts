@@ -10,9 +10,7 @@
   {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
 {% endcomment %}
 {%- unless product.has_only_default_variant -%}
-  {% comment %} {%- if block.settings.picker_type == 'button' -%} {% endcomment %}
-
-  {% for option in product.options -%}
+  {%- if block.settings.picker_type == 'button' -%}
     <variant-radios
       id="variant-radios-{{ section.id }}"
       class="no-js-hidden"
@@ -23,17 +21,18 @@
       {% endif %}
       {{ block.shopify_attributes }}
     >
-      
+      {%- for option in product.options_with_values -%}
+        {{ option}}
         <fieldset class="js product-form__input">
           <legend class="form__label">{{ option.name }}</legend>
-          {% render 'product-variant-options', product: product, product.options_with_values: option, block: block %}
+          {% render 'product-variant-options', product: product, option: option, block: block %}
         </fieldset>
-      
+      {%- endfor -%}
       <script type="application/json">
         {{ product.variants | json }}
       </script>
     </variant-radios>
-  {% comment %} {%- else -%} {% endcomment %}
+  {%- else -%}
     <variant-selects
       id="variant-selects-{{ section.id }}"
       class="no-js-hidden"
@@ -67,8 +66,7 @@
         {{ product.variants | json }}
       </script>
     </variant-selects>
-  {%- endfor -%}
-  {% comment %} {%- endif -%} {% endcomment %}
+  {%- endif -%}
 {%- endunless -%}
 
 <noscript class="product-form__noscript-wrapper-{{ section.id }}">
