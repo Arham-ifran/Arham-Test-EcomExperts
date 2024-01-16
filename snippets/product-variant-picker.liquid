@@ -11,8 +11,8 @@
 {% endcomment %}
 {%- unless product.has_only_default_variant -%}
 
-  {% for color_option in product.options_by_name['Color'].values %}
-    {{ color_option }}
+  {% for size_option in product.options_by_name['Size'].values %}
+    {{ size_option }}
   {% endfor %}
   {%- if block.settings.picker_type == 'button' -%}
     <variant-radios
