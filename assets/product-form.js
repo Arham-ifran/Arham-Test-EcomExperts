@@ -115,7 +115,7 @@ if (!customElements.get('product-form')) {
       */
 
       handleAdditionalProductInCart() {
-        console.log("in function");
+       
         let formData = {
           'items': [{
            'id': 44711197606111,
