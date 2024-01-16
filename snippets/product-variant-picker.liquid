@@ -12,8 +12,8 @@
 
 {%- unless product.has_only_default_variant -%}
 
-  {% for value in product.options_with_values['color'] %}
-    {{ value }}
+  {%- for option in product.options_with_values -%}
+    {{ option.name }}
  {% endfor %}
 
   {%- if block.settings.picker_type == 'button' -%}
