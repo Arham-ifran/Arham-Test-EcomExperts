@@ -9,27 +9,7 @@ class CartRemoveButton extends HTMLElement {
       const checkVaraintIdOfAdditionalProduct = this.getAttribute('data-variantId');
       if (checkVaraintIdOfAdditionalProduct == 44726287630559) {
 
-       
-
-       
-        fetch(window.Shopify.routes.root + 'cart/change.js', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify( {
-            'id': 44711197606111,
-            'quantity': 0
-            
-          })
-        })
-        .then(response => {
-          return response.json();
-        })
-        .then(data => console.log(data))
-        .catch((error) => {
-          console.error('Error:', error);
-        });
+        console.log(this.dataset.index, 0);
 
 
       }
