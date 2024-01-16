@@ -612,9 +612,14 @@
       document.querySelector('#Variants-{{ section.id }}').addEventListener('change', function (event) {
         hiddenInput.value = event.currentTarget.value;
       });
-      alert(this.dataset.updateUrl )
+      
     });
    
+  </script>
+  <script>
+    window.onload = function() {
+      alert(this.dataset.url)
+    };
   </script>
 
   {%- liquid
