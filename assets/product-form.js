@@ -27,7 +27,7 @@ if (!customElements.get('product-form')) {
         function :add addition product in cart 
         **/
 
-        this.handleAdditionalProductInCart();
+        //this.handleAdditionalProductInCart();
 
         this.submitButton.setAttribute('aria-disabled', true);
         this.submitButton.classList.add('loading');
