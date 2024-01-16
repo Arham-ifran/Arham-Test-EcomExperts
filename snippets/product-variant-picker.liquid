@@ -9,12 +9,17 @@
   Usage:
   {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
 {% endcomment %}
-
 {%- unless product.has_only_default_variant -%}
 
-  {%- for option in product.options_with_values -%}
-    {{ option.name }}
- {% endfor %}
+  {%- assign hasSizeOption = false -%}
+
+{%- for option in product.options_with_values -%}
+  {%- if option.name == 'Size' -%}
+    {%- assign hasSizeOption = true -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{{ hasSizeOption}} 
 
   {%- if block.settings.picker_type == 'button' -%}
     <variant-radios
@@ -92,7 +97,7 @@
               selected="selected"
             {% endif %}
             {% if variant.available == false %}
-              disablediAND
+              disabled
             {% endif %}
             value="{{ variant.id }}"
           >
