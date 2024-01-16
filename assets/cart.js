@@ -25,9 +25,9 @@ class CartRemoveButton extends HTMLElement {
             return response.json();
 
           }).then((response) => {
-            if (response.status) {
+            
               console.log(response.status);
-            }
+            
             })
           .catch((error) => {
             console.error('Error:', error);
