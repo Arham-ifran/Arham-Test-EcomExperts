@@ -936,7 +936,7 @@ class SlideshowComponent extends SliderComponent {
     const slideScrollPosition =
       this.slider.scrollLeft +
       this.sliderFirstItemNode.clientWidth *
-        (this.sliderControlLinksArray.indexOf(event.currentTarget) + 1 - this.currentPage);
+      (this.sliderControlLinksArray.indexOf(event.currentTarget) + 1 - this.currentPage);
     this.slider.scrollTo({
       left: slideScrollPosition,
     });
@@ -1005,10 +1005,6 @@ class VariantSelects extends HTMLElement {
     window.history.replaceState({}, '', `${this.dataset.url}?variant=${this.currentVariant.id}`);
   }
 
-  updateRefreshURL() {
-    alert('in function');
-    window.history.replaceState({}, '', `${this.dataset.url}`);
-  }
   updateShareUrl() {
     const shareButton = document.getElementById(`Share-${this.dataset.section}`);
     if (!shareButton || !shareButton.updateUrl) return;
@@ -1077,8 +1073,7 @@ class VariantSelects extends HTMLElement {
     const sectionId = this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section;
 
     fetch(
-      `${this.dataset.url}?variant=${requestedVariantId}&section_id=${
-        this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section
+      `${this.dataset.url}?variant=${requestedVariantId}&section_id=${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section
       }`
     )
       .then((response) => response.text())
@@ -1269,9 +1264,6 @@ class ProductRecommendations extends HTMLElement {
 
 customElements.define('product-recommendations', ProductRecommendations);
 window.addEventListener('load', () => {
-  
-  const variantRadios = document.querySelector('variant-selects');
-  if (variantRadios) {
-    variantRadios.updateRefreshURL();
-  }
+
+  window.history.replaceState({}, '', `${this.dataset.url}`);
 });
