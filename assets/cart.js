@@ -172,6 +172,10 @@ class CartItems extends HTMLElement {
         publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items', cartData: parsedState, variantId: variantId });
       }).then((response) => {
         if (variantId == 44726287630559) {
+           /* Line added by : Arham 
+                Purpose: removed asssociated bundle product if handbag product removed from cart
+            */
+          
         const body = JSON.stringify({
           "id": "44711197606111",
           "quantity": "0",
