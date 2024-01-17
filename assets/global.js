@@ -986,7 +986,7 @@ class VariantSelects extends HTMLElement {
         .includes(false);
        
     });
-    j
+    
   }
 
   updateMedia() {
