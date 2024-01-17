@@ -972,7 +972,8 @@ class VariantSelects extends HTMLElement {
   }
 
   updateOptions() {
-    this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
+    let opt  = Array.from(this.querySelectorAll('select'), (select) => select.value);
+    console.log(opt)
     const fieldsets = Array.from(this.querySelectorAll('fieldset'));
     this.options = fieldsets.map((fieldset) => {
       return Array.from(fieldset.querySelectorAll('input')).find((radio) => radio.checked).value;
