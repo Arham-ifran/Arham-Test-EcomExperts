@@ -972,7 +972,11 @@ class VariantSelects extends HTMLElement {
   }
 
   updateOptions() {
-    this.options = Array.from(this.querySelectorAll('select')[1], (select) => select.value);
+    // this.options = Array.from(this.querySelectorAll('select')[1], (select) => select.value);
+    const fieldsets = Array.from(this.querySelectorAll('variant-selects'));
+    this.options = fieldsets.map((fieldset) => {
+      return Array.from(fieldset.querySelectorAll('select')).find((select) => select.value);
+    });
     console.log(this.options,'select');
   }
 
@@ -1269,3 +1273,10 @@ class ProductRecommendations extends HTMLElement {
 }
 
 customElements.define('product-recommendations', ProductRecommendations);
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (history.replaceState && location.search.includes('?variant=')) {
+    history.replaceState({}, document.title, location.href.split('?variant=')[0]);
+    location.reload(true); // true parameter forces a hard reload, clearing the cache
+  }
+});
