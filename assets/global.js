@@ -1263,9 +1263,13 @@ class ProductRecommendations extends HTMLElement {
 }
 
 customElements.define('product-recommendations', ProductRecommendations);
-document.addEventListener('DOMContentLoaded', function() {
+
+/* Line added by : Arham 
+  Purpose: Hard refresh to remove selected option of variant
+*/
+document.addEventListener('DOMContentLoaded', function () {
   if (history.replaceState && location.search.includes('?variant=')) {
     history.replaceState({}, document.title, location.href.split('?variant=')[0]);
-    location.reload(true); 
+    location.reload(true);
   }
 });
