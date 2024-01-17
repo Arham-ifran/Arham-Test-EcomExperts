@@ -260,7 +260,6 @@
                 role="list"
               >
                 {%- for item in search.results -%}
-                  {% unless item.handle == 'dark-winter-jacket' %}
                   {% assign lazy_load = false %}
                   {%- if forloop.index > 2 -%}
                     {%- assign lazy_load = true -%}
@@ -318,8 +317,6 @@
                         </div>
                     {%- endcase -%}
                   </li>
-                  
-                {%- endunless -%}
                 {%- endfor -%}
               </ul>
               {%- if paginate.pages > 1 -%}
