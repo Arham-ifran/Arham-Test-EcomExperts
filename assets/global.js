@@ -936,7 +936,7 @@ class SlideshowComponent extends SliderComponent {
     const slideScrollPosition =
       this.slider.scrollLeft +
       this.sliderFirstItemNode.clientWidth *
-      (this.sliderControlLinksArray.indexOf(event.currentTarget) + 1 - this.currentPage);
+        (this.sliderControlLinksArray.indexOf(event.currentTarget) + 1 - this.currentPage);
     this.slider.scrollTo({
       left: slideScrollPosition,
     });
@@ -972,23 +972,20 @@ class VariantSelects extends HTMLElement {
   }
 
   updateOptions() {
-    const fieldsets = Array.from(this.querySelectorAll('fieldset'));
-    this.options = fieldsets.map((fieldset) => {
-      return Array.from(fieldset.querySelectorAll('input')).find((radio) => radio.checked).value;
-    });
-    
     this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
   }
 
   updateMasterId() {
-    console.log(this.options,' ===========')
+    console.log( this.options,'+++++++options')
     this.currentVariant = this.getVariantData().find((variant) => {
       return !variant.options
         .map((option, index) => {
           return this.options[index] === option;
         })
         .includes(false);
+       
     });
+    console.log( this.currentVariant,'+++++++')
   }
 
   updateMedia() {
@@ -1079,7 +1076,8 @@ class VariantSelects extends HTMLElement {
     const sectionId = this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section;
 
     fetch(
-      `${this.dataset.url}?variant=${requestedVariantId}&section_id=${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section
+      `${this.dataset.url}?variant=${requestedVariantId}&section_id=${
+        this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section
       }`
     )
       .then((response) => response.text())
@@ -1199,7 +1197,6 @@ class VariantSelects extends HTMLElement {
 
   getVariantData() {
     this.variantData = this.variantData || JSON.parse(this.querySelector('[type="application/json"]').textContent);
-    
     return this.variantData;
   }
 }
@@ -1209,7 +1206,6 @@ customElements.define('variant-selects', VariantSelects);
 class VariantRadios extends VariantSelects {
   constructor() {
     super();
-    this.addEventListener('change', this.onVariantChange);
   }
 
   setInputAvailability(listOfOptions, listOfAvailableOptions) {
@@ -1228,7 +1224,6 @@ class VariantRadios extends VariantSelects {
       return Array.from(fieldset.querySelectorAll('input')).find((radio) => radio.checked).value;
     });
   }
-
 }
 
 customElements.define('variant-radios', VariantRadios);
@@ -1272,13 +1267,3 @@ class ProductRecommendations extends HTMLElement {
 }
 
 customElements.define('product-recommendations', ProductRecommendations);
-
-/* Line added by : Arham 
-  Purpose: Hard refresh to remove selected option of variant
-*/
-document.addEventListener('DOMContentLoaded', function () {
-  if (history.replaceState && location.search.includes('?variant=')) {
-    history.replaceState({}, document.title, location.href.split('?variant=')[0]);
-    location.reload(true);
-  }
-});
