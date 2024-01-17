@@ -130,6 +130,7 @@
               aria-labelledby="predictive-search-products"
             >
               {%- for product in predictive_search.resources.products -%}
+                {% unless product.handle == 'dark-winter-jacket' %}
                 <li
                   id="predictive-search-option-product-{{ forloop.index }}"
                   class="predictive-search__list-item"
@@ -163,6 +164,7 @@
                       {%- endif -%}
                     </div>
                   </a>
+                {%- endunless -%}
                 </li>
               {%- endfor -%}
             </ul>
