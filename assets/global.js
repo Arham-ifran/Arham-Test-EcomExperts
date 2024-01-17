@@ -1264,6 +1264,6 @@ class ProductRecommendations extends HTMLElement {
 
 customElements.define('product-recommendations', ProductRecommendations);
 window.addEventListener('load', () => {
-
+  alert('here');
   window.history.replaceState({}, '', `${this.dataset.url}`);
 });
