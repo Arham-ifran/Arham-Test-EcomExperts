@@ -25,7 +25,7 @@
 
 {%- for value in option.values -%}
   {%- liquid
-    assign option_disabled = true
+    assign option_disabled = false
 
     for option1_name in variants_option1_arr
     
@@ -55,9 +55,11 @@
           selected="selected"
         {% endif %}
       >
-        
+        {% if option_disabled -%}
+          {{- 'products.product.value_unavailable' | t: option_value: value -}}
+        {%- else -%}
           {{- value -}}
-        
+        {%- endif %}
       </option>
       {%- else -%}
     <input
