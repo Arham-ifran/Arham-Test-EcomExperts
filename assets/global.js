@@ -1263,7 +1263,8 @@ class ProductRecommendations extends HTMLElement {
 }
 
 customElements.define('product-recommendations', ProductRecommendations);
-window.addEventListener('load', () => {
-  alert('here');
-  window.history.replaceState({}, '', `${this.dataset.url}`);
+document.addEventListener('DOMContentLoaded', function() {
+  if (history.replaceState && location.search.includes('?variant=')) {
+    history.replaceState({}, document.title, location.href.split('?variant=')[0]);
+  }
 });
