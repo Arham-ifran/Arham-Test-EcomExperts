@@ -1222,6 +1222,16 @@ class VariantRadios extends VariantSelects {
       return Array.from(fieldset.querySelectorAll('input')).find((radio) => radio.checked).value;
     });
   }
+  updateMasterId() {
+    console.log(this.options,'++++++++')
+    this.currentVariant = this.getVariantData().find((variant) => {
+      return !variant.options
+        .map((option, index) => {
+          return this.options[index] === option;
+        })
+        .includes(false);
+    });
+  }
 }
 
 customElements.define('variant-radios', VariantRadios);
