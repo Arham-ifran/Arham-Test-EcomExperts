@@ -1005,6 +1005,10 @@ class VariantSelects extends HTMLElement {
     window.history.replaceState({}, '', `${this.dataset.url}?variant=${this.currentVariant.id}`);
   }
 
+  updateRefreshURL() {
+    if (!this.currentVariant || this.dataset.updateUrl === 'false') return;
+    window.history.replaceState({}, '', `${this.dataset.url}`);
+  }
   updateShareUrl() {
     const shareButton = document.getElementById(`Share-${this.dataset.section}`);
     if (!shareButton || !shareButton.updateUrl) return;
@@ -1264,3 +1268,10 @@ class ProductRecommendations extends HTMLElement {
 }
 
 customElements.define('product-recommendations', ProductRecommendations);
+window.addEventListener('load', () => {
+  alert('hhheeee');
+  const variantRadios = document.querySelector('variant-selects');
+  if (variantRadios) {
+    variantRadios.updateRefreshURL();
+  }
+});
