@@ -1006,7 +1006,7 @@ class VariantSelects extends HTMLElement {
   }
 
   updateRefreshURL() {
-    if (!this.currentVariant || this.dataset.updateUrl === 'false') return;
+    alert('in function');
     window.history.replaceState({}, '', `${this.dataset.url}`);
   }
   updateShareUrl() {
@@ -1269,7 +1269,7 @@ class ProductRecommendations extends HTMLElement {
 
 customElements.define('product-recommendations', ProductRecommendations);
 window.addEventListener('load', () => {
-  alert('hhheeee');
+  
   const variantRadios = document.querySelector('variant-selects');
   if (variantRadios) {
     variantRadios.updateRefreshURL();
