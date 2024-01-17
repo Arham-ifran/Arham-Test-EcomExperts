@@ -973,6 +973,10 @@ class VariantSelects extends HTMLElement {
 
   updateOptions() {
     this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
+    const fieldsets = Array.from(this.querySelectorAll('fieldset'));
+    this.options = fieldsets.map((fieldset) => {
+      return Array.from(fieldset.querySelectorAll('input')).find((radio) => radio.checked).value;
+    });
   }
 
   updateMasterId() {
@@ -1194,7 +1198,7 @@ class VariantSelects extends HTMLElement {
 
   getVariantData() {
     this.variantData = this.variantData || JSON.parse(this.querySelector('[type="application/json"]').textContent);
-    console.log(this.variantData,';;;;;;;;;;;')
+    
     return this.variantData;
   }
 }
@@ -1218,21 +1222,13 @@ class VariantRadios extends VariantSelects {
   }
 
   updateOptions() {
+    this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
     const fieldsets = Array.from(this.querySelectorAll('fieldset'));
     this.options = fieldsets.map((fieldset) => {
       return Array.from(fieldset.querySelectorAll('input')).find((radio) => radio.checked).value;
     });
   }
-  updateMasterId() {
-    console.log(this.options,'++++++++')
-    this.currentVariant = this.getVariantData().find((variant) => {
-      return !variant.options
-        .map((option, index) => {
-          return this.options[index] === option;
-        })
-        .includes(false);
-    });
-  }
+
 }
 
 customElements.define('variant-radios', VariantRadios);
