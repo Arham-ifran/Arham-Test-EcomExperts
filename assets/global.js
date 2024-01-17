@@ -972,25 +972,17 @@ class VariantSelects extends HTMLElement {
   }
 
   updateOptions() {
-    // this.options = Array.from(this.querySelectorAll('select')[1], (select) => select.value);
-    const fieldsets = Array.from(this.querySelectorAll('variant-selects'));
-    this.options = fieldsets.map((fieldset) => {
-      return Array.from(fieldset.querySelectorAll('select')).find((select) => select.value);
-    });
-    console.log(this.options,'select');
+    this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
   }
 
   updateMasterId() {
-    
     this.currentVariant = this.getVariantData().find((variant) => {
       return !variant.options
         .map((option, index) => {
           return this.options[index] === option;
         })
         .includes(false);
-       
     });
-    
   }
 
   updateMedia() {
@@ -1228,7 +1220,6 @@ class VariantRadios extends VariantSelects {
     this.options = fieldsets.map((fieldset) => {
       return Array.from(fieldset.querySelectorAll('input')).find((radio) => radio.checked).value;
     });
-    console.log(this.options,'check box');
   }
 }
 
