@@ -28,6 +28,7 @@
     assign option_disabled = true
 
     for option1_name in variants_option1_arr
+    
       case option.position
         when 1
           if variants_option1_arr[forloop.index0] == value and variants_available_arr[forloop.index0]
@@ -45,16 +46,23 @@
     endfor
   -%}
 
+  
   {%- if block.settings.picker_type == 'button' -%}
-    {%- if option.name =="Color"-%}
     <input
       type="radio"
       id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
       name="{{ option.name }}"
       value="{{ value | escape }}"
       form="{{ product_form_id }}"
-      {% if option.selected_value == value %}
-        checked
+
+      {% if option.name == 'Size' %}
+        {% if value==variants_option2_arr[0] %}
+          checked
+        {% endif %}
+      {%- else -%}
+        {% if option.selected_value == value %}
+          checked
+        {% endif %}
       {% endif %}
       {% if option_disabled %}
         class="disabled"
@@ -64,22 +72,6 @@
       {{ value -}}
       <span class="visually-hidden">{{ 'products.product.variant_sold_out_or_unavailable' | t }}</span>
     </label>
-    {%- else -%}
-    <option
-      id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
-      value="{{ value | escape }}"
-      form="{{ product_form_id }}"
-      {% if option.selected_value == value %}
-        selected="selected"
-      {% endif %}
-    >
-      {% if option_disabled -%}
-        {{- 'products.product.value_unavailable' | t: option_value: value -}}
-      {%- else -%}
-        {{- value -}}
-      {%- endif %}
-    </option>
-  {%- endif -%}
   {%- elsif block.settings.picker_type == 'dropdown' -%}
     <option
       value="{{ value | escape }}"
