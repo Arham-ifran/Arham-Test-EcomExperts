@@ -977,7 +977,7 @@ class VariantSelects extends HTMLElement {
   }
 
   updateMasterId() {
-    console.log( this.options,'+++++++options')
+    
     this.currentVariant = this.getVariantData().find((variant) => {
       return !variant.options
         .map((option, index) => {
@@ -986,7 +986,7 @@ class VariantSelects extends HTMLElement {
         .includes(false);
        
     });
-    console.log( this.currentVariant,'+++++++')
+    j
   }
 
   updateMedia() {
