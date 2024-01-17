@@ -1266,5 +1266,6 @@ customElements.define('product-recommendations', ProductRecommendations);
 document.addEventListener('DOMContentLoaded', function() {
   if (history.replaceState && location.search.includes('?variant=')) {
     history.replaceState({}, document.title, location.href.split('?variant=')[0]);
+    location.reload(true); 
   }
 });
