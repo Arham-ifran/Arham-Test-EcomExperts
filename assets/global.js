@@ -976,14 +976,30 @@ class VariantSelects extends HTMLElement {
   // }
 
   updateOptions() {
-    const selects = Array.from(this.querySelectorAll('select')).map(select => select.value);
-    const fieldsets = Array.from(this.querySelectorAll('fieldset')).map(fieldset => {
-      const checkedRadio = Array.from(fieldset.querySelectorAll('input')).find(radio => radio.checked);
-      return checkedRadio ? checkedRadio.value : null;
+    // Mark selected options in 'select' elements
+    Array.from(this.querySelectorAll('select')).forEach(select => {
+      const selectedOption = select.options[select.selectedIndex];
+      if (selectedOption) {
+        selectedOption.setAttribute('selected', 'selected');
+      }
     });
 
-    this.options = [...selects, ...fieldsets];
-    console.log(this.options, 'in rev array');
+    // Mark checked radio buttons in 'fieldset' elements
+    Array.from(this.querySelectorAll('fieldset')).forEach(fieldset => {
+      const checkedRadio = Array.from(fieldset.querySelectorAll('input[type="radio"]')).find(radio => radio.checked);
+      if (checkedRadio) {
+        checkedRadio.setAttribute('checked', 'checked');
+      }
+    });
+
+    // const selects = Array.from(this.querySelectorAll('select')).map(select => select.value);
+    // const fieldsets = Array.from(this.querySelectorAll('fieldset')).map(fieldset => {
+    //   const checkedRadio = Array.from(fieldset.querySelectorAll('input')).find(radio => radio.checked);
+    //   return checkedRadio ? checkedRadio.value : null;
+    // });
+
+    // this.options = [...selects, ...fieldsets];
+    // console.log(this.options, 'in rev array');
   }
 
   updateMasterId() {
