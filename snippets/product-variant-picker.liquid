@@ -160,9 +160,9 @@
                {%- liquid assign  varaintOptionImage= product.metafields.custom.firstimage.value |img_url %}
             
               {% elsif forloop.index0 == 1 %}
-              {%- liquid assign  varaintOptionImage= product.metafields.custom.secondImage.value |img_url %}
+              {%- liquid assign  varaintOptionImage=  product.metafields.custom.secondimage.value |img_url %}
               {% else %}
-              {%- liquid assign  varaintOptionImage= product.metafields.custom.thirdImage.value |img_url %}
+              {%- liquid assign  varaintOptionImage= product.metafields.custom.thirdimage.value |img_url %}
               {% endif %}
               <label
                 for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
