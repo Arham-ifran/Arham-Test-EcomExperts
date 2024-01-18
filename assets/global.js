@@ -1271,16 +1271,16 @@ class VariantRadios extends VariantSelects {
   //   });
   // }
   updateOptions() {
-
     this.querySelectorAll('fieldset').forEach(fieldset => {
-      const checkedRadio = Array.from(fieldset.querySelectorAll('input[type="radio"]')).find(radio => radio.checked);
+      const radios = Array.from(fieldset.querySelectorAll('input[type="radio"]'));
+      const checkedRadio = radios.find(radio => radio.checked);
       if (checkedRadio) {
-        checkedRadio.setAttribute('checked', 'checked');
+        checkedRadio.setAttribute('checked', '');
       }
     });
 
 
-    const dropdown = document.querySelector('#myDropdown');
+    const dropdown = document.querySelector('variant-selects');
     const selectedValue = dropdown.options[dropdown.selectedIndex].value;
     console.log(selectedValue);
 
