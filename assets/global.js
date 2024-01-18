@@ -1000,15 +1000,15 @@ class VariantSelects extends HTMLElement {
 
 
 
+    const variantRadioSection = document.querySelector('variant-radios');
 
-
-    const fieldsets = Array.from(this.querySelectorAll('fieldset'));
+    const fieldsets = Array.from(variantRadioSection.querySelectorAll('fieldset'));
     const checkedRadioValues = fieldsets.map(fieldset => {
       const checkedRadio = Array.from(fieldset.querySelectorAll('input[type="radio"]')).find(radio => radio.checked);
       return checkedRadio ? checkedRadio.value : null;
     });
 
-    console.log(checkedRadioValues);
+    console.log(checkedRadioValues,'check box function');
 
 
     this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
