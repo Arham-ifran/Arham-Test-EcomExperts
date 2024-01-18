@@ -28,6 +28,7 @@
     assign option_disabled = true
 
     for option1_name in variants_option1_arr
+    
       case option.position
         when 1
           if variants_option1_arr[forloop.index0] == value and variants_available_arr[forloop.index0]
@@ -45,6 +46,7 @@
     endfor
   -%}
 
+  
   {%- if block.settings.picker_type == 'button' -%}
     <input
       type="radio"
@@ -52,8 +54,15 @@
       name="{{ option.name }}"
       value="{{ value | escape }}"
       form="{{ product_form_id }}"
-      {% if option.selected_value == value %}
-        checked
+
+      {% if option.name == 'Size' %}
+        {% if value==variants_option2_arr[0] %}
+          checked
+        {% endif %}
+      {%- else -%}
+        {% if option.selected_value == value %}
+          checked
+        {% endif %}
       {% endif %}
       {% if option_disabled %}
         class="disabled"

@@ -5,7 +5,8 @@ class CartRemoveButton extends HTMLElement {
     this.addEventListener('click', (event) => {
       event.preventDefault();
       const cartItems = this.closest('cart-items') || this.closest('cart-drawer-items');
-      cartItems.updateQuantity(this.dataset.index, 0);
+      
+      cartItems.updateQuantity(this.dataset.index, 0,'',this.getAttribute('data-variantId'));
     });
   }
 }
@@ -104,8 +105,9 @@ class CartItems extends HTMLElement {
   }
 
   updateQuantity(line, quantity, name, variantId) {
+    console.log(variantId)
     this.enableLoading(line);
-
+    
     const body = JSON.stringify({
       line,
       quantity,
@@ -168,7 +170,31 @@ class CartItems extends HTMLElement {
         }
 
         publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items', cartData: parsedState, variantId: variantId });
-      })
+      }).then((response) => {
+        if (variantId == 44726287630559) {
+           /* Line added by : Arham 
+                Purpose: removed asssociated bundle product if handbag product removed from cart
+            */
+          
+        const body = JSON.stringify({
+          "id": "44711197606111",
+          "quantity": "0",
+
+        });
+
+        fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
+        .then((response) => response.json())
+        .then(data => {
+          console.log(data);
+          location.reload();
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+        }
+       })
+
+
       .catch(() => {
         this.querySelectorAll('.loading__spinner').forEach((overlay) => overlay.classList.add('hidden'));
         const errors = document.getElementById('cart-errors') || document.getElementById('CartDrawer-CartErrors');
