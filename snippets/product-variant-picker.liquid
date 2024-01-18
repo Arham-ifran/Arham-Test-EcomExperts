@@ -154,15 +154,25 @@
                 {{ value }}
               </label>
             {% endcomment %}
+            {% comment %}
+              Line added by : Arham
+              Purpose: Add variant images in color selection
+            {% endcomment %}
 
             {% if product.variants[forloop.index0].image != blank and option.name == 'Color' %}
               {% if forloop.index0 == 0 %}
-               {%- liquid assign  varaintOptionImage= product.metafields.custom.firstimage.value |img_url %}
-            
+                {%- liquid
+                  assign varaintOptionImage = product.metafields.custom.firstimage.value | img_url
+                %}
+
               {% elsif forloop.index0 == 1 %}
-              {%- liquid assign  varaintOptionImage=  product.metafields.custom.secondimage.value |img_url %}
+                {%- liquid
+                  assign varaintOptionImage = product.metafields.custom.secondimage.value | img_url
+                %}
               {% else %}
-              {%- liquid assign  varaintOptionImage= product.metafields.custom.thirdimage.value |img_url %}
+                {%- liquid
+                  assign varaintOptionImage = product.metafields.custom.thirdimage.value | img_url
+                %}
               {% endif %}
               <label
                 for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"

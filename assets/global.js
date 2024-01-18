@@ -977,6 +977,10 @@ class VariantSelects extends HTMLElement {
   //   this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
   // }
 
+  /* Function added by : Arham 
+    Purpose: Before select new option unselect all previous options
+  */
+
   unSelectOption() {
 
     this.querySelectorAll('select').forEach(select => {
@@ -988,7 +992,9 @@ class VariantSelects extends HTMLElement {
 
 
   }
-
+  /* Update Function by : Arham 
+     Purpose: The default function does not meet the requirement, so update the function to use both drop-down and swatches for variant selection.
+  */
 
   updateOptions() {
     this.querySelectorAll('select').forEach(select => {
@@ -997,8 +1003,6 @@ class VariantSelects extends HTMLElement {
         selectedOption.setAttribute('selected', 'selected');
       }
     });
-
-
 
     const variantRadioSection = document.querySelector('variant-radios');
 
@@ -1251,6 +1255,9 @@ class VariantRadios extends VariantSelects {
       }
     });
   }
+  /* Function added by : Arham 
+    Purpose: Before check new option uncheck all previous options
+  */
 
   unSelectOption() {
 
@@ -1270,6 +1277,9 @@ class VariantRadios extends VariantSelects {
   //     return Array.from(fieldset.querySelectorAll('input')).find((radio) => radio.checked).value;
   //   });
   // }
+    /* Update Function by : Arham 
+     Purpose: The default function does not meet the requirement, so update the function to use both drop-down and swatches for variant selection.
+  */
   updateOptions() {
     this.querySelectorAll('fieldset').forEach(fieldset => {
       const radios = Array.from(fieldset.querySelectorAll('input[type="radio"]'));
@@ -1292,7 +1302,7 @@ class VariantRadios extends VariantSelects {
     });
 
 
-    
+
     const mergedValues = [...checkedRadioValue, dropdownValue];
     console.log(mergedValues)
     this.options = mergedValues
