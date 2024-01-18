@@ -977,16 +977,17 @@ class VariantSelects extends HTMLElement {
 
   updateOptions() {
     const elements = Array.from(this.querySelectorAll('select, fieldset'));
-    
-    this.options = elements.map((element) => {
-      if (element.tagName.toLowerCase() === 'select') {
-        
-        return element.value;
-      } else if (element.tagName.toLowerCase() === 'fieldset') {
-        return Array.from(element.querySelectorAll('input')).find((radio) => radio.checked).value;
-      }
-    });
-    console.log(this.options,'in single ')
+
+  this.options = elements.map((element) => {
+    if (element.tagName.toLowerCase() === 'select') {
+      return element.value;
+    } else if (element.tagName.toLowerCase() === 'fieldset') {
+      const checkedRadio = Array.from(element.querySelectorAll('input')).find((radio) => radio.checked);
+      return checkedRadio ? checkedRadio.value : null;
+    }
+  });
+
+  console.log(this.options, 'in single array');
   }
 
   updateMasterId() {
