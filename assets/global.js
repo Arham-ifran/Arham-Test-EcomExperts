@@ -936,7 +936,7 @@ class SlideshowComponent extends SliderComponent {
     const slideScrollPosition =
       this.slider.scrollLeft +
       this.sliderFirstItemNode.clientWidth *
-      (this.sliderControlLinksArray.indexOf(event.currentTarget) + 1 - this.currentPage);
+        (this.sliderControlLinksArray.indexOf(event.currentTarget) + 1 - this.currentPage);
     this.slider.scrollTo({
       left: slideScrollPosition,
     });
@@ -968,60 +968,24 @@ class VariantSelects extends HTMLElement {
       this.updateVariantInput();
       this.renderProductInfo();
       this.updateShareUrl();
+      this.unSelectOption();
     }
   }
 
-  // updateOptions() {
-  //   this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
-  // }
-
-  updateOptions() {
-    // Unselect the previously selected option in 'select' elements
-    Array.from(this.querySelectorAll('select')).forEach(select => {
+  unSelectOption() {
+    console.log('in function unSelectOption')
+   (this.querySelectorAll('select')).forEach(select => {
       const previouslySelectedOption = select.querySelector('option[selected="selected"]');
       if (previouslySelectedOption) {
         previouslySelectedOption.removeAttribute('selected');
       }
     });
   
-    // Uncheck the previously checked radio button in 'fieldset' elements
-    Array.from(this.querySelectorAll('fieldset')).forEach(fieldset => {
-      const previouslyCheckedRadio = fieldset.querySelector('input[type="radio"][checked="checked"]');
-      if (previouslyCheckedRadio) {
-        previouslyCheckedRadio.removeAttribute('checked');
-      }
-    });
-  
-    // Mark the selected option in 'select' elements
-    Array.from(this.querySelectorAll('select')).forEach(select => {
-      const selectedOption = select.options[select.selectedIndex];
-      if (selectedOption) {
-        selectedOption.setAttribute('selected', 'selected');
-      }
-    });
-  
-    // Mark the checked radio button in 'fieldset' elements
-    Array.from(this.querySelectorAll('fieldset')).forEach(fieldset => {
-      const checkedRadio = Array.from(fieldset.querySelectorAll('input[type="radio"]')).find(radio => radio.checked);
-      if (checkedRadio) {
-        checkedRadio.setAttribute('checked', 'checked');
-      }
-    });
-  
-    // Collect options from 'select' and 'fieldset'
-    const selects = Array.from(this.querySelectorAll('select')).map(select => select.value);
-    const fieldsets = Array.from(this.querySelectorAll('fieldset')).map(fieldset => {
-      const checkedRadio = Array.from(fieldset.querySelectorAll('input[type="radio"]')).find(radio => radio.checked);
-      return checkedRadio ? checkedRadio.value : null;
-    });
-  
-    // Combine the options
-    this.options = [...selects, ...fieldsets];
-    console.log(this.options, 'in rev array');
   }
   
 
-   
+  updateOptions() {
+    this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
   }
 
   updateMasterId() {
@@ -1122,7 +1086,8 @@ class VariantSelects extends HTMLElement {
     const sectionId = this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section;
 
     fetch(
-      `${this.dataset.url}?variant=${requestedVariantId}&section_id=${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section
+      `${this.dataset.url}?variant=${requestedVariantId}&section_id=${
+        this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section
       }`
     )
       .then((response) => response.text())
@@ -1263,12 +1228,12 @@ class VariantRadios extends VariantSelects {
     });
   }
 
-  // updateOptions() {
-  //   const fieldsets = Array.from(this.querySelectorAll('fieldset'));
-  //   this.options = fieldsets.map((fieldset) => {
-  //     return Array.from(fieldset.querySelectorAll('input')).find((radio) => radio.checked).value;
-  //   });
-  // }
+  updateOptions() {
+    const fieldsets = Array.from(this.querySelectorAll('fieldset'));
+    this.options = fieldsets.map((fieldset) => {
+      return Array.from(fieldset.querySelectorAll('input')).find((radio) => radio.checked).value;
+    });
+  }
 }
 
 customElements.define('variant-radios', VariantRadios);
@@ -1313,7 +1278,7 @@ class ProductRecommendations extends HTMLElement {
 
 customElements.define('product-recommendations', ProductRecommendations);
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
   if (history.replaceState && location.search.includes('?variant=')) {
     history.replaceState({}, document.title, location.href.split('?variant=')[0]);
     location.reload(true); // true parameter forces a hard reload, clearing the cache
