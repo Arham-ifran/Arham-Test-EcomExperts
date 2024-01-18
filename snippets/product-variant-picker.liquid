@@ -127,7 +127,6 @@
   </noscript>
 {% endcomment %}
 
-
 {%- unless product.has_only_default_variant -%}
   <variant-radios
     class="no-js-hidden"
@@ -157,9 +156,17 @@
             {% endcomment %}
 
             {% if product.variants[forloop.index0].image != blank and option.name == 'Color' %}
+              {% if forloop.index0 == 0 %}
+               {%- liquid assign  varaintOptionImage= product.metafields.custom.firstimage.value |img_url %}
+            
+              {% elsif forloop.index0 == 1 %}
+              {%- liquid assign  varaintOptionImage= product.metafields.custom.secondImage.value |img_url %}
+              {% else %}
+              {%- liquid assign  varaintOptionImage= product.metafields.custom.thirdImage.value |img_url %}
+              {% endif %}
               <label
                 for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
-                style="background-image: url({{product.metafields.custom.firstimage.value |img_url: '' }});height:40px;width:40px;background-size: cover;"
+                style="background-image: url({{ varaintOptionImage : '' }});height:40px;width:40px;background-size: cover;"
               ></label>
             {% else %}
               <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
