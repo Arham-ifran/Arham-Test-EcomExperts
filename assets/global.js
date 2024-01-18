@@ -981,12 +981,18 @@ class VariantSelects extends HTMLElement {
         previouslySelectedOption.removeAttribute('selected');
       }
     });
-    console.log('in function unSelectOption')
+   
   
   }
   
 
   updateOptions() {
+    this.querySelectorAll('select').forEach(select => {
+      const selectedOption = select.options[select.selectedIndex];
+      if (selectedOption) {
+        selectedOption.setAttribute('selected', 'selected');
+      }
+    });
     this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
   }
 
