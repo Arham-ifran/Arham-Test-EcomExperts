@@ -129,7 +129,7 @@
 
 
 
-{% for image in variant.metafields.[variantimage].value %}
+{% for image in product.metafields.custom.variantimage.value%}
 
   {{ image | img_url}}
   
