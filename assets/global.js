@@ -936,7 +936,7 @@ class SlideshowComponent extends SliderComponent {
     const slideScrollPosition =
       this.slider.scrollLeft +
       this.sliderFirstItemNode.clientWidth *
-        (this.sliderControlLinksArray.indexOf(event.currentTarget) + 1 - this.currentPage);
+      (this.sliderControlLinksArray.indexOf(event.currentTarget) + 1 - this.currentPage);
     this.slider.scrollTo({
       left: slideScrollPosition,
     });
@@ -952,6 +952,7 @@ class VariantSelects extends HTMLElement {
   }
 
   onVariantChange() {
+    this.unSelectOption();
     this.updateOptions();
     this.updateMasterId();
     this.toggleAddButton(true, '', false);
@@ -970,11 +971,48 @@ class VariantSelects extends HTMLElement {
       this.updateShareUrl();
     }
   }
+  //comment defualt function 
 
-  updateOptions() {
-    this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
+  // updateOptions() {
+  //   this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
+  // }
+
+  unSelectOption() {
+
+    this.querySelectorAll('select').forEach(select => {
+      const previouslySelectedOption = select.querySelector('option[selected="selected"]');
+      if (previouslySelectedOption) {
+        previouslySelectedOption.removeAttribute('selected');
+      }
+    });
+
+
   }
 
+
+  updateOptions() {
+    this.querySelectorAll('select').forEach(select => {
+      const selectedOption = select.options[select.selectedIndex];
+      if (selectedOption) {
+        selectedOption.setAttribute('selected', 'selected');
+      }
+    });
+
+
+
+    const variantRadioSection = document.querySelector('variant-radios');
+
+    const fieldsets = Array.from(variantRadioSection.querySelectorAll('fieldset'));
+    const checkedRadioValues = fieldsets.map(fieldset => {
+      const checkedRadio = Array.from(fieldset.querySelectorAll('input[type="radio"]')).find(radio => radio.checked);
+      return checkedRadio ? checkedRadio.value : null;
+    });
+
+
+    const dropdownValues = Array.from(this.querySelectorAll('select'), (select) => select.value);
+    const mergedValues = [...checkedRadioValues, ...dropdownValues];
+    this.options = mergedValues
+  }
   updateMasterId() {
     this.currentVariant = this.getVariantData().find((variant) => {
       return !variant.options
@@ -1073,8 +1111,7 @@ class VariantSelects extends HTMLElement {
     const sectionId = this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section;
 
     fetch(
-      `${this.dataset.url}?variant=${requestedVariantId}&section_id=${
-        this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section
+      `${this.dataset.url}?variant=${requestedVariantId}&section_id=${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section
       }`
     )
       .then((response) => response.text())
@@ -1215,11 +1252,51 @@ class VariantRadios extends VariantSelects {
     });
   }
 
+  unSelectOption() {
+
+
+    this.querySelectorAll('fieldset').forEach(fieldset => {
+      Array.from(fieldset.querySelectorAll('input[type="radio"]')).forEach(radio => {
+        radio.removeAttribute('checked');
+      });
+    });
+
+  }
+
+
+  // updateOptions() {
+  //   const fieldsets = Array.from(this.querySelectorAll('fieldset'));
+  //   this.options = fieldsets.map((fieldset) => {
+  //     return Array.from(fieldset.querySelectorAll('input')).find((radio) => radio.checked).value;
+  //   });
+  // }
   updateOptions() {
+    this.querySelectorAll('fieldset').forEach(fieldset => {
+      const radios = Array.from(fieldset.querySelectorAll('input[type="radio"]'));
+      const checkedRadio = radios.find(radio => radio.checked);
+      if (checkedRadio) {
+        checkedRadio.setAttribute('checked', '');
+      }
+    });
+
+    const variantSelectsSection = document.querySelector('variant-selects');
+    const dropdown = variantSelectsSection.querySelector('select');
+
+    const dropdownValue = dropdown ? dropdown.value : null;
+
+
+
     const fieldsets = Array.from(this.querySelectorAll('fieldset'));
-    this.options = fieldsets.map((fieldset) => {
+    const checkedRadioValue = fieldsets.map((fieldset) => {
       return Array.from(fieldset.querySelectorAll('input')).find((radio) => radio.checked).value;
     });
+
+
+    
+    const mergedValues = [...checkedRadioValue, dropdownValue];
+    console.log(mergedValues)
+    this.options = mergedValues
+
   }
 }
 
@@ -1265,7 +1342,7 @@ class ProductRecommendations extends HTMLElement {
 
 customElements.define('product-recommendations', ProductRecommendations);
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   if (history.replaceState && location.search.includes('?variant=')) {
     history.replaceState({}, document.title, location.href.split('?variant=')[0]);
     location.reload(true); // true parameter forces a hard reload, clearing the cache
