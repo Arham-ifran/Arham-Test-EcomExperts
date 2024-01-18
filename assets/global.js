@@ -936,7 +936,7 @@ class SlideshowComponent extends SliderComponent {
     const slideScrollPosition =
       this.slider.scrollLeft +
       this.sliderFirstItemNode.clientWidth *
-        (this.sliderControlLinksArray.indexOf(event.currentTarget) + 1 - this.currentPage);
+      (this.sliderControlLinksArray.indexOf(event.currentTarget) + 1 - this.currentPage);
     this.slider.scrollTo({
       left: slideScrollPosition,
     });
@@ -976,18 +976,14 @@ class VariantSelects extends HTMLElement {
   // }
 
   updateOptions() {
-    const elements = Array.from(this.querySelectorAll('select, fieldset'));
-
-  this.options = elements.map((element) => {
-    if (element.tagName.toLowerCase() === 'select') {
-      return element.value;
-    } else if (element.tagName.toLowerCase() === 'fieldset') {
-      const checkedRadio = Array.from(element.querySelectorAll('input')).find((radio) => radio.checked);
+    const selects = Array.from(this.querySelectorAll('select')).map(select => select.value);
+    const fieldsets = Array.from(this.querySelectorAll('fieldset')).map(fieldset => {
+      const checkedRadio = Array.from(fieldset.querySelectorAll('input')).find(radio => radio.checked);
       return checkedRadio ? checkedRadio.value : null;
-    }
-  });
+    });
 
-  console.log(this.options, 'in single array 2');
+    this.options = [...selects, ...fieldsets];
+    console.log(this.options, 'in single array');
   }
 
   updateMasterId() {
@@ -1088,8 +1084,7 @@ class VariantSelects extends HTMLElement {
     const sectionId = this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section;
 
     fetch(
-      `${this.dataset.url}?variant=${requestedVariantId}&section_id=${
-        this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section
+      `${this.dataset.url}?variant=${requestedVariantId}&section_id=${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section
       }`
     )
       .then((response) => response.text())
@@ -1280,7 +1275,7 @@ class ProductRecommendations extends HTMLElement {
 
 customElements.define('product-recommendations', ProductRecommendations);
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   if (history.replaceState && location.search.includes('?variant=')) {
     history.replaceState({}, document.title, location.href.split('?variant=')[0]);
     location.reload(true); // true parameter forces a hard reload, clearing the cache
