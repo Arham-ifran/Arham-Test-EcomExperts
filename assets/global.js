@@ -1294,6 +1294,7 @@ class VariantRadios extends VariantSelects {
 
     
     const mergedValues = [...checkedRadioValue, ...dropdownValue];
+    console.log(mergedValues)
     this.options = mergedValues
 
   }
