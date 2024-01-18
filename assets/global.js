@@ -952,6 +952,7 @@ class VariantSelects extends HTMLElement {
   }
 
   onVariantChange() {
+    this.unSelectOption();
     this.updateOptions();
     this.updateMasterId();
     this.toggleAddButton(true, '', false);
@@ -968,7 +969,7 @@ class VariantSelects extends HTMLElement {
       this.updateVariantInput();
       this.renderProductInfo();
       this.updateShareUrl();
-      this.unSelectOption();
+      
     }
   }
 
