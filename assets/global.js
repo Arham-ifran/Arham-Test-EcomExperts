@@ -987,7 +987,7 @@ class VariantSelects extends HTMLElement {
     }
   });
 
-  console.log(this.options, 'in single array');
+  console.log(this.options, 'in single array 2');
   }
 
   updateMasterId() {
