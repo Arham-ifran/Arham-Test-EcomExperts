@@ -127,6 +127,17 @@
   </noscript>
 {% endcomment %}
 
+{% assign variantImages = product.metafields.custom.variantImage %}
+
+{% if variantImages and variantImages.size > 0 %}
+  {% for image in variantImages %}
+    <!-- Access individual image properties as needed -->
+    {{ image.url }}
+    {{ image.alt }}
+    <!-- Add more properties as required -->
+  {% endfor %}
+{% endif %}
+
 {%- unless product.has_only_default_variant -%}
   <variant-radios
     class="no-js-hidden"
@@ -158,8 +169,8 @@
             {% if product.variants[forloop.index0].image != blank and option.name == 'Color' %}
               <label
                 for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
-                style="background-image: url({{ product.metafields.custom.variantimage[0].url | img_url: '' }});height:40px;width:40px;background-size: cover;"
-              ></label>
+                style="background-image: url({{ product.variants[forloop.index0].image | img_url: '' }});height:40px;width:40px;background-size: cover;"
+              >{{  product.variants[forloop.index0].image }}</label>
             {% else %}
               <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
                 {{ value }}
