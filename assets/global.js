@@ -1215,6 +1215,7 @@ class VariantRadios extends VariantSelects {
     });
   }
 
+  
   updateOptions() {
     const fieldsets = Array.from(this.querySelectorAll('fieldset'));
     this.options = fieldsets.map((fieldset) => {
