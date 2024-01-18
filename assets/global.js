@@ -1279,10 +1279,12 @@ class VariantRadios extends VariantSelects {
       }
     });
 
+    const variantSelectsSection = document.querySelector('variant-selects');
+    const dropdown = variantSelectsSection.querySelector('select');
 
-    const dropdown = document.querySelector('variant-selects');
-    const selectedValue = dropdown.options[dropdown.selectedIndex].value;
+    const selectedValue = dropdown ? dropdown.value : null;
     console.log(selectedValue);
+
 
     const fieldsets = Array.from(this.querySelectorAll('fieldset'));
     this.options = fieldsets.map((fieldset) => {
