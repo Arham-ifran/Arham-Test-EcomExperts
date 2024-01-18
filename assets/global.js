@@ -980,7 +980,7 @@ class VariantSelects extends HTMLElement {
     
     this.options = elements.map((element) => {
       if (element.tagName.toLowerCase() === 'select') {
-        console.log(element.value)
+        
         return element.value;
       } else if (element.tagName.toLowerCase() === 'fieldset') {
         return Array.from(element.querySelectorAll('input')).find((radio) => radio.checked).value;
