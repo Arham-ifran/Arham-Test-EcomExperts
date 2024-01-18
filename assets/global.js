@@ -969,32 +969,42 @@ class VariantSelects extends HTMLElement {
       this.updateVariantInput();
       this.renderProductInfo();
       this.updateShareUrl();
-      
     }
   }
+  //comment defualt function 
+
+  // updateOptions() {
+  //   this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
+  // }
 
   unSelectOption() {
    
-   this.querySelectorAll('select').forEach(select => {
-      const previouslySelectedOption = select.querySelector('option[selected="selected"]');
-      if (previouslySelectedOption) {
-        previouslySelectedOption.removeAttribute('selected');
-      }
-    });
-   
-  
-  }
-  
-
-  updateOptions() {
     this.querySelectorAll('select').forEach(select => {
-      const selectedOption = select.options[select.selectedIndex];
-      if (selectedOption) {
-        selectedOption.setAttribute('selected', 'selected');
-      }
-    });
-    this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
-  }
+       const previouslySelectedOption = select.querySelector('option[selected="selected"]');
+       if (previouslySelectedOption) {
+         previouslySelectedOption.removeAttribute('selected');
+       }
+     });
+    
+   
+   }
+   
+ 
+   updateOptions() {
+     this.querySelectorAll('select').forEach(select => {
+       const selectedOption = select.options[select.selectedIndex];
+       if (selectedOption) {
+         selectedOption.setAttribute('selected', 'selected');
+       }
+     });
+     const checkedOptions = Array.from(this.querySelectorAll('fieldset input[type="radio"]:checked'))
+     .map(radio => radio.value);
+   
+      console.log(checkedOptions);
+
+
+     //this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
+   }
 
   updateMasterId() {
     this.currentVariant = this.getVariantData().find((variant) => {
