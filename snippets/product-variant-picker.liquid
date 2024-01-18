@@ -127,17 +127,14 @@
   </noscript>
 {% endcomment %}
 
-{% assign variantImages = product.metafields.custom.variantImage %}
 
-{% if variantImages and variantImages.size > 0 %}
-  {% for image in variantImages %}
-    <!-- Access individual image properties as needed -->
-    {{ image.url }}
-    {{ image.alt }}
-    -------------------------------------------------
-    <!-- Add more properties as required -->
+
+{% for image in variant.metafields.[variantimage].value %}
+
+  {{ image | img_url}}
+  
+  
   {% endfor %}
-{% endif %}
 
 {%- unless product.has_only_default_variant -%}
   <variant-radios
