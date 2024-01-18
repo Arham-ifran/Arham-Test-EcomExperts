@@ -985,7 +985,7 @@ class VariantSelects extends HTMLElement {
         return Array.from(element.querySelectorAll('input')).find((radio) => radio.checked).value;
       }
     });
-    console.log(this.options)
+    console.log(this.options,'in single ')
   }
 
   updateMasterId() {
