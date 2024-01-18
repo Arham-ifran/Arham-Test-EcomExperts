@@ -136,6 +136,13 @@
   
   {% endfor %}
 
+  {% assign variantImages = product.metafields.custom.variantImage %}
+
+  
+    
+    {{ variantImages[0]| img_url }}
+
+
 {%- unless product.has_only_default_variant -%}
   <variant-radios
     class="no-js-hidden"
