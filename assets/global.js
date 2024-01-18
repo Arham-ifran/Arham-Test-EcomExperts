@@ -1282,14 +1282,19 @@ class VariantRadios extends VariantSelects {
     const variantSelectsSection = document.querySelector('variant-selects');
     const dropdown = variantSelectsSection.querySelector('select');
 
-    const selectedValue = dropdown ? dropdown.value : null;
-    console.log(selectedValue);
+    const dropdownValue = dropdown ? dropdown.value : null;
+
 
 
     const fieldsets = Array.from(this.querySelectorAll('fieldset'));
-    this.options = fieldsets.map((fieldset) => {
+    const checkedRadioValue = fieldsets.map((fieldset) => {
       return Array.from(fieldset.querySelectorAll('input')).find((radio) => radio.checked).value;
     });
+
+
+    
+    const mergedValues = [...checkedRadioValue, ...dropdownValue];
+    this.options = mergedValues
 
   }
 }
