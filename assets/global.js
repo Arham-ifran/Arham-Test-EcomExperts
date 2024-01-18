@@ -974,13 +974,14 @@ class VariantSelects extends HTMLElement {
   }
 
   unSelectOption() {
-    console.log('in function unSelectOption')
-   (this.querySelectorAll('select')).forEach(select => {
+   
+   this.querySelectorAll('select').forEach(select => {
       const previouslySelectedOption = select.querySelector('option[selected="selected"]');
       if (previouslySelectedOption) {
         previouslySelectedOption.removeAttribute('selected');
       }
     });
+    console.log('in function unSelectOption')
   
   }
   
