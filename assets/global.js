@@ -1008,11 +1008,14 @@ class VariantSelects extends HTMLElement {
       return checkedRadio ? checkedRadio.value : null;
     });
 
-    console.log(checkedRadioValues,'check box function');
+    console.log(checkedRadioValues, 'check box function');
+    // Merge both arrays
+    const dropdownValues = Array.from(this.querySelectorAll('select'), (select) => select.value);
+    const mergedValues = [...dropdownValues, ...checkedRadioValues];
 
+    console.log(mergedValues, 'Merged Values');
 
     this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
-    console.log(this.options,'--select');
   }
 
   updateMasterId() {
