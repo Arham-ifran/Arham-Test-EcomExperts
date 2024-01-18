@@ -1011,13 +1011,12 @@ class VariantSelects extends HTMLElement {
     console.log(checkedRadioValues, 'check box function');
     // Merge both arrays
     const dropdownValues = Array.from(this.querySelectorAll('select'), (select) => select.value);
-    const mergedValues = [...dropdownValues, ...checkedRadioValues];
+    const mergedValues = [ ...checkedRadioValues, ...dropdownValues];
 
     console.log(mergedValues, 'Merged Values');
 
-    this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
+    this.options = mergedValues
   }
-
   updateMasterId() {
     this.currentVariant = this.getVariantData().find((variant) => {
       return !variant.options
