@@ -936,7 +936,7 @@ class SlideshowComponent extends SliderComponent {
     const slideScrollPosition =
       this.slider.scrollLeft +
       this.sliderFirstItemNode.clientWidth *
-        (this.sliderControlLinksArray.indexOf(event.currentTarget) + 1 - this.currentPage);
+      (this.sliderControlLinksArray.indexOf(event.currentTarget) + 1 - this.currentPage);
     this.slider.scrollTo({
       left: slideScrollPosition,
     });
@@ -978,33 +978,41 @@ class VariantSelects extends HTMLElement {
   // }
 
   unSelectOption() {
-   
+
     this.querySelectorAll('select').forEach(select => {
-       const previouslySelectedOption = select.querySelector('option[selected="selected"]');
-       if (previouslySelectedOption) {
-         previouslySelectedOption.removeAttribute('selected');
-       }
-     });
-    
-   
-   }
-   
- 
-   updateOptions() {
-     this.querySelectorAll('select').forEach(select => {
-       const selectedOption = select.options[select.selectedIndex];
-       if (selectedOption) {
-         selectedOption.setAttribute('selected', 'selected');
-       }
-     });
-     const checkedOptions = Array.from(this.querySelectorAll('fieldset input[type="radio"]:checked'))
-     .map(radio => radio.value);
-   
-      console.log(checkedOptions);
+      const previouslySelectedOption = select.querySelector('option[selected="selected"]');
+      if (previouslySelectedOption) {
+        previouslySelectedOption.removeAttribute('selected');
+      }
+    });
 
 
-     //this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
-   }
+  }
+
+
+  updateOptions() {
+    this.querySelectorAll('select').forEach(select => {
+      const selectedOption = select.options[select.selectedIndex];
+      if (selectedOption) {
+        selectedOption.setAttribute('selected', 'selected');
+      }
+    });
+
+
+
+
+
+    const fieldsets = Array.from(this.querySelectorAll('fieldset'));
+    const checkedRadioValues = fieldsets.map(fieldset => {
+      const checkedRadio = Array.from(fieldset.querySelectorAll('input[type="radio"]')).find(radio => radio.checked);
+      return checkedRadio ? checkedRadio.value : null;
+    });
+
+    console.log(checkedRadioValues);
+
+
+    this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
+  }
 
   updateMasterId() {
     this.currentVariant = this.getVariantData().find((variant) => {
@@ -1104,8 +1112,7 @@ class VariantSelects extends HTMLElement {
     const sectionId = this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section;
 
     fetch(
-      `${this.dataset.url}?variant=${requestedVariantId}&section_id=${
-        this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section
+      `${this.dataset.url}?variant=${requestedVariantId}&section_id=${this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section
       }`
     )
       .then((response) => response.text())
@@ -1296,7 +1303,7 @@ class ProductRecommendations extends HTMLElement {
 
 customElements.define('product-recommendations', ProductRecommendations);
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   if (history.replaceState && location.search.includes('?variant=')) {
     history.replaceState({}, document.title, location.href.split('?variant=')[0]);
     location.reload(true); // true parameter forces a hard reload, clearing the cache
